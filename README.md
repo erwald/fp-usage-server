@@ -13,6 +13,7 @@ A server which receives usage statistics from the [FlashPoll](http://www.flashpo
 2. Clone this repo.
 3. Run `mix deps.get` from the project folder to get all out of date dependencies.
 4. Run `mix run --no-halt` to start the server. To stop the server, press `Ctrl+C` and then `a`.
+5. Go to `localhost:4000/reports` to see the collected usage statistics.
 
 ## Dependencies
 
@@ -21,3 +22,4 @@ This project makes use of the following dependencies:
 * **Plug** for handling HTTP requests.
 * **Cowboy** as the web server.
 * **Poison** for JSON parsing.
+* **Timex** for parsing and formatting of dates.

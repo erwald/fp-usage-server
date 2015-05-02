@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title><%= if title, do: "#{title}" %></title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <h2><%= if title, do: "#{title}" %></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Device id</th>
+          <th>Time</th>
+          <th>Type</th>
+          <th>Poll id</th>
+          <th>Section id</th>
+          <th>Question id</th>
+          <th>Skipped</th>
+          <th>Response</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for report <- reports do %>
+          <tr>
+            <td><%= report["deviceId"] %></td>
+            <td><%= report["time"] %></td>
+            <td><%= report["type"] %></td>
+            <td><%= report["pollId"] %></td>
+            <td><%= report["sectionId"] %></td>
+            <td><%= report["questionId"] %></td>
+            <td><%= report["skipped"] %></td>
+            <td><%= if report["response"], do: Dict.size(report["response"]) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </body>
+</html>

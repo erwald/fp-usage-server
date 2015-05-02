@@ -3,7 +3,7 @@ defmodule FP.UsageHandler do
   require Logger
 
   # The folder (from project root) where reports are saved.
-  @output_folder "out/"
+  @output_folder "../out/"
 
   # The interval (in milliseconds) after which the storing of reports to file
   # are triggered.
@@ -68,18 +68,14 @@ defmodule FP.UsageHandler do
   # state, if any, to file. Returns a reference to the timer.
   defp reset_timer(timer, handler) do
     if timer, do: :timer.cancel(timer) # Cancel the previous timer.
-    {:ok, tref} = :timer.apply_after(
-      @saving_interval,
-      FP.UsageHandler,
-      :get_and_store_reports,
-      [handler]
-      )
+    {:ok, tref} = :timer.apply_after(@saving_interval, FP.UsageHandler,
+      :get_and_store_reports, [handler])
     tref
   end
 
   # Gets all of the reports stored in files.
   defp stored_reports do
-    File.ls!(@output_folder)
+    File.ls!(Path.join(__DIR__, @output_folder))
     |> Enum.filter(&String.match?(&1, ~r/.+\.json$/))
     |> parse_jsons
     |> List.flatten
@@ -88,7 +84,7 @@ defmodule FP.UsageHandler do
   # Takes a list of file names and returns a list of maps.
   defp parse_jsons(files) do
     Enum.map(files, fn file ->
-      "#{@output_folder}#{file}"
+      Path.join([__DIR__, @output_folder, file])
       |> File.read!
       |> Poison.Parser.parse!
     end)
@@ -104,6 +100,6 @@ defmodule FP.UsageHandler do
   # Generates a file path for a new file.
   defp make_file_path do
     date = DateFormat.format!(Date.local, "{ISOz}")
-    "#{@output_folder}#{date}.json"
+    Path.join([__DIR__, @output_folder, "#{date}.json"])
   end
 end
