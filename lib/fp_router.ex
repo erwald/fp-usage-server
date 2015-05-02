@@ -6,8 +6,8 @@ defmodule FP.Router do
   plug :dispatch
 
   get "/reports" do
-    handler = Application.get_env(:fp, :handler)
-    send_resp(conn, 200, "#{inspect FP.UsageHandler.read(handler)}")
+    reports = Application.get_env(:fp, :handler) |> FP.UsageHandler.read
+    send_resp(conn, 200, "#{inspect reports}")
   end
 
   # Receive a POST request with a report as its body.
