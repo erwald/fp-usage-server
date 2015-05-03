@@ -3,6 +3,7 @@ defmodule FP.Router do
   require EEx
   require Logger
 
+  plug Plug.Static, at: "/", from: :fp
   plug :match
   plug :dispatch
 

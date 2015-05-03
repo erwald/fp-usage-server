@@ -1,0 +1,29 @@
+html {
+  position: relative;
+  min-height: 100%;
+  font-family: 'Roboto', sans-serif;
+  color: hsla(0, 0%, 0%, 0.86);
+}
+
+h1 {
+  font-size: 2em;
+  text-color: #af2f3f;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 0px;
+}
+
+table th {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+table td {
+  padding-left: 10px;
+  padding-right: 10px;
+  border-left: 1px solid hsla(0, 0%, 0%, 0.13);
+  border-right: 1px solid hsla(0, 0%, 0%, 0.13);
+  text-align: center;
+}

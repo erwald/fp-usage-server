@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <title><%= if title, do: "#{title}" %></title>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,400italic" rel="stylesheet" type="text/css">
+    <link href="main.css" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   </head>
   <body>
-    <h2><%= if title, do: "#{title}" %></h2>
+    <h1><%= if title, do: "#{title}" %></h1>
     <table>
       <thead>
         <tr>
@@ -23,10 +26,10 @@
       <tbody>
         <%= for report <- reports do %>
           <tr>
-            <td><%= report["deviceId"] %></td>
+            <td class="colorized"><%= report["deviceId"] %></td>
             <td><%= report["time"] %></td>
             <td><%= report["type"] %></td>
-            <td><%= report["pollId"] %></td>
+            <td class="colorized"><%= report["pollId"] %></td>
             <td><%= report["sectionId"] %></td>
             <td><%= report["questionId"] %></td>
             <td><%= report["skipped"] %></td>
@@ -35,5 +38,26 @@
         <% end %>
       </tbody>
     </table>
+
+    <script>
+    var stringToColour = function(str) {
+      // str to hash
+      for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
+
+      // int/hash to hex
+      for (var i = 0, colour = "#"; i < 3; colour += ("00" + ((hash >> i++ * 8) & 0xFF).toString(16)).slice(-2));
+
+      return colour;
+    }
+
+    $(document).ready(function(){
+      // Set a unique text color for certain texts.
+      $('td').each(function( index, element ){
+        if ($( this ).is( ".colorized" )) {
+          $( this ).css( "color", stringToColour( $( this ).text() ) );
+        }
+      });
+    });
+    </script>
   </body>
 </html>
