@@ -3,17 +3,21 @@ FPUsageServer
 
 A server which receives usage statistics from the [FlashPoll](http://www.flashpoll.eu/en/home) iOS app and stores them locally.
 
-> **Note:** Tracking usage statistics not be done for versions on the App Store, so as not to trespass on the users' privacy.
+> **Warning:** tracking usage statistics should not be done for versions on the App Store, so as not to trespass on the users' privacy.
 
-## Usage
+## Installation
 
-> **Note:** this app is made for Elixir 1.0.4. It has only been tested on OS X Yosemite.
+> **Note:** this program has only been tested with Elixir 1.0.4, Erlang 17.5 and on OS X Yosemite.
 
 1. Install [Elixir](http://elixir-lang.org/install.html), for instance with Homebrew: `brew update`, then `brew install elixir`.
 2. Clone this repo.
 3. Run `mix deps.get` from the project folder to get all out of date dependencies.
-4. Run `mix run --no-halt` to start the server. To stop the server, press `Ctrl+C` and then `a`.
-5. Go to `localhost:4000/reports` to see the collected usage statistics.
+4. *(If necessary)* run `mix compile` to compile the project files.
+
+## Usage
+
+1. Run `mix run --no-halt` to start the server. To stop the server, enter `Ctrl+C` and then `a` in the console.
+2. Go to `localhost:4000/reports` to see a presentation of the collected usage statistics.
 
 ## Dependencies
 
