@@ -35,7 +35,7 @@ defmodule FP.UsageHandler do
     Logger.info "READ ALL <-"
     stored_reports ++ Agent.get(handler, fn {reports, _} ->
       reports
-    end)
+    end) |> Enum.sort(fn %{"time" => t1}, %{"time" => t2} -> t1 < t2 end)
   end
 
   @doc """
