@@ -35,9 +35,7 @@ defmodule FP.UsageHandler do
     Logger.info "READ ALL <-"
     stored_reports ++ Agent.get(handler, fn {reports, _} ->
       reports
-    end)
-    |> sort_by_epoch_times
-    |> Enum.map(fn report -> format_report(report) end)
+    end) |> sort_by_epoch_times |> format_reports
   end
 
   @doc """
@@ -100,6 +98,10 @@ defmodule FP.UsageHandler do
 
     # Return the formatted date.
     %{report | "time" => DateFormat.format!(date, "%e %b, %T", :strftime)}
+  end
+
+  defp format_reports(reports) do
+    Enum.map(reports, &format_report(&1))
   end
 
   # Generates a file path for a new file.
