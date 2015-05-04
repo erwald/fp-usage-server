@@ -22,17 +22,19 @@ brew install elixir
 Then, clone this repo and run the following from within the project folder:
 
 ```sh
+cd fp_usage_server
+
 # Get all out-of-date dependencies
 mix deps.get
 
-# (If necessary) compile the project files
+# Compile the project files
 mix compile
 ```
 
 ## Usage
 
 1. Run `mix run --no-halt` to start the server. To stop the server, enter `Ctrl+C` and then `a` in the console.
-2. Go to `localhost:4000/reports` to see a presentation of the collected usage statistics.
+2. Navigate to [`localhost:4000/reports`](localhost:4000/reports) to see a presentation of the collected usage statistics.
 
 ## Dependencies
 
