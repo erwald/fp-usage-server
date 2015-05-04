@@ -24,18 +24,20 @@ defmodule FP.UsageHandler do
     Logger.info "ADD -> #{inspect report}"
     Agent.update(handler, fn
       {reports, timer} ->
-        {[format_report(report) | reports], reset_timer(timer, handler)}
+        {[report | reports], reset_timer(timer, handler)}
     end)
   end
 
   @doc """
-  Reads all the reports in the list.
+  Reads all the reports in the list, sorted by time.
   """
   def read(handler) do
     Logger.info "READ ALL <-"
     stored_reports ++ Agent.get(handler, fn {reports, _} ->
       reports
-    end) |> Enum.sort(fn %{"time" => t1}, %{"time" => t2} -> t1 < t2 end)
+    end)
+    |> sort_by_epoch_times
+    |> Enum.map(fn report -> format_report(report) end)
   end
 
   @doc """
@@ -90,16 +92,30 @@ defmodule FP.UsageHandler do
     end)
   end
 
-  # Formats a report by converting dates from epochs to ISO standard.
+  # Formats a report by converting dates from epochs to 'dd/mm hh:mm:ss'.
   defp format_report(report) do
+    # Get time (as UNIX epoch) and and create a date of it.
     %{"time" => time} = report
-    date = Date.from(String.to_float(time), :secs)
-    %{report | "time" => DateFormat.format!(date, "{ISO}")}
+    date = Date.from(String.to_float(time), :secs) |> Date.local
+
+    # Return the formatted date.
+    %{report | "time" => DateFormat.format!(date, "%e %b, %T", :strftime)}
   end
 
   # Generates a file path for a new file.
   defp make_file_path do
     date = DateFormat.format!(Date.local, "{ISOz}")
     Path.join([__DIR__, @output_folder, "#{date}.json"])
+  end
+
+  # Sorts a list of reports by their time (given as UNIX epoch strings).
+  defp sort_by_epoch_times(reports) do
+    Enum.sort(reports, fn %{"time" => t1}, %{"time" => t2} ->
+      compare_epochs(t1, t2)
+    end)
+  end
+
+  defp compare_epochs(epoch, other_epoch) do
+    String.to_float(epoch) < String.to_float(other_epoch)
   end
 end
