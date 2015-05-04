@@ -9,10 +9,25 @@ A server which receives usage statistics from the [FlashPoll](http://www.flashpo
 
 > **Note:** this program has only been tested with Elixir 1.0.4, Erlang 17.5 and on OS X Yosemite.
 
-1. Install [Elixir](http://elixir-lang.org/install.html), for instance with Homebrew: `brew update`, then `brew install elixir`.
-2. Clone this repo.
-3. Run `mix deps.get` from the project folder to get all out of date dependencies.
-4. *(If necessary)* run `mix compile` to compile the project files.
+First, install [Elixir](http://elixir-lang.org/install.html), for instance with Homebrew:
+
+```sh
+# Update Homebrew
+brew update
+
+# Install Elixir
+brew install elixir
+```
+
+Then, clone this repo and run the following from within the project folder:
+
+```sh
+# Get all out-of-date dependencies
+mix deps.get
+
+# (If necessary) compile the project files
+mix compile
+```
 
 ## Usage
 

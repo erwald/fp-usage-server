@@ -8,6 +8,7 @@ html {
 h1 {
   font-size: 2em;
   text-color: #af2f3f;
+  margin-left: 1em;
 }
 
 table {

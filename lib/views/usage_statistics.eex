@@ -40,6 +40,7 @@
     </table>
 
     <script>
+    // Taken from http://stackoverflow.com/a/16348977/1077679
     var stringToColour = function(str) {
       // str to hash
       for (var i = 0, hash = 0; i < str.length; hash = str.charCodeAt(i++) + ((hash << 5) - hash));
