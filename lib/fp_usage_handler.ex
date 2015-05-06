@@ -2,6 +2,9 @@ defmodule FP.UsageHandler do
   use Timex
   require Logger
 
+  # Used to identify the usage handler throughout the node.
+  @name __MODULE__
+
   # The folder (from project root) where reports are saved.
   @output_folder "../out/"
 
@@ -12,9 +15,9 @@ defmodule FP.UsageHandler do
   @doc """
   Starts a new usage statistics handler.
   """
-  def start_link do
+  def start_link(_opts \\ []) do
     Logger.info "START"
-    Agent.start_link(fn -> {[], nil} end)
+    Agent.start_link(fn -> {[], nil} end, name: __MODULE__)
   end
 
   @doc """

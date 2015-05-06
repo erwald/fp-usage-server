@@ -34,7 +34,7 @@ mix compile
 ## Usage
 
 1. Run `mix run --no-halt` to start the server. To stop the server, enter `Ctrl+C` and then `a` in the console.
-2. Navigate to [`localhost:4000/reports`](localhost:4000/reports) to see a presentation of the collected usage statistics.
+2. Navigate to [localhost:4000/reports](http://localhost:4000/reports) to see a presentation of the collected usage statistics.
 
 ## Dependencies
 

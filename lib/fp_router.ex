@@ -12,7 +12,7 @@ defmodule FP.Router do
     Path.join([__DIR__, "views", "usage_statistics.eex"]), [:title, :reports])
 
   get "/reports" do
-    reports = Application.get_env(:fp, :handler) |> FP.UsageHandler.read
+    reports = FP.UsageHandler.read(FP.UsageHandler)
     body = template_reports("Usage statistics", reports)
     send_resp(conn, 200, body)
   end
@@ -24,8 +24,7 @@ defmodule FP.Router do
     parsed_body = Poison.Parser.parse!(body)
 
     # Add the report to the handler.
-    handler = Application.get_env(:fp, :handler)
-    FP.UsageHandler.add(handler, parsed_body)
+    FP.UsageHandler.add(FP.UsageHandler, parsed_body)
 
     send_resp(conn, 200, "success")
   end
