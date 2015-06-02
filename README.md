@@ -36,6 +36,19 @@ mix compile
 1. Run `mix run --no-halt` to start the server. To stop the server, enter `Ctrl+C` and then `a` in the console.
 2. Navigate to [localhost:4000/reports](http://localhost:4000/reports) to see a presentation of the collected usage statistics.
 
+### Reporting usage statistics
+
+Send a POST request to `/report` with a JSON body like so (for example):
+
+```json
+{
+	"type": "openedPoll",
+	"time": "1430819719.025690",
+	"pollId": "7EA410C3-55FB-4A3D-B8DE-5E3BFCC5A608",
+	"deviceId": "4280065409640689646"
+}
+```
+
 ## Dependencies
 
 This project makes use of the following dependencies:
