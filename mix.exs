@@ -33,6 +33,7 @@ defmodule FPUsageServer.Mixfile do
     {:cowboy, "~> 1.0.0"},
     {:plug, "~> 0.12"},
     {:poison, "~> 1.4.0"},
-    {:timex, "~> 0.13.4"}]
+    {:timex, "~> 0.13.4"},
+    {:blaguth, "~> 1.1.1"}]
   end
 end

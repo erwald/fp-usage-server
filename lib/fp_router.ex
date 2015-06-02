@@ -3,6 +3,8 @@ defmodule FP.Router do
   require EEx
   require Logger
 
+  plug Blaguth, realm: "Secret", credentials: {"user", "password"}
+
   plug Plug.Static, at: "/", from: :fp
   plug :match
   plug :dispatch
@@ -31,5 +33,9 @@ defmodule FP.Router do
 
   match _ do
     send_resp(conn, 404, "oops")
+  end
+
+  defp authenticated?(%{credentials: {user, pass}}) do
+    User.authenticate(user, pass)
   end
 end
